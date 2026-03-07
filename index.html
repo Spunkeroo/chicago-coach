@@ -147,8 +147,8 @@ footer a{color:#4EB4E6;margin:0 8px;}
   <h1>Find Your Perfect Coach in Chicago</h1>
   <p>Connect with verified life coaches, business coaches, executive coaches, and more across the Chicago metro area.</p>
   <div class="search-box">
-    <input type="text" placeholder="What kind of coaching are you looking for?" aria-label="Search coaches">
-    <button type="button">Find a Coach</button>
+    <input type="text" id="coach-search" placeholder="What kind of coaching are you looking for?" aria-label="Search coaches" onkeydown="if(event.key==='Enter')searchCoaches()">
+    <button type="button" onclick="searchCoaches()">Find a Coach</button>
   </div>
   <div class="rotating-facts" id="rotating-facts"></div>
 </section>
@@ -410,6 +410,18 @@ footer a{color:#4EB4E6;margin:0 8px;}
 <div style="text-align:center;padding:16px 0 8px;"><button class="tip-spunk-btn" onclick="openTipModal()" aria-label="Tip Spunk"><span class="tip-icon">🧡</span> Tip Spunk</button></div>
 </footer>
 
+<script>
+function searchCoaches(){
+  var q=document.getElementById('coach-search').value.toLowerCase().trim();
+  document.querySelectorAll('.cat-card-link').forEach(function(c){
+    c.style.display=(!q||c.textContent.toLowerCase().indexOf(q)!==-1)?'':'none';
+  });
+  document.querySelectorAll('.coach-card,.resource-card').forEach(function(c){
+    c.style.display=(!q||c.textContent.toLowerCase().indexOf(q)!==-1)?'':'none';
+  });
+  if(q)document.getElementById('categories').scrollIntoView({behavior:'smooth'});
+}
+</script>
 <script src="https://spunk.codes/cross-promo.js" defer></script>
 <script>
 (function(){
